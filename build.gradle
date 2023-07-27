@@ -1,25 +1,50 @@
+import java.util.regex.Matcher
+
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.1.2'
-	id 'io.spring.dependency-management' version '1.1.2'
+    id "io.spring.dependency-management"
+    id 'net.researchgate.release' version '3.0.2'
 }
 
-group = 'app.rankd'
-version = '0.0.1-SNAPSHOT'
-
-java {
-	sourceCompatibility = '17'
+allprojects {
+    group = 'app.rankd'
 }
 
-repositories {
-	mavenCentral()
-}
 
-dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
+subprojects {
 
-tasks.named('test') {
-	useJUnitPlatform()
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java-library'
+    apply from: rootProject.file('gradle/constants.gradle')
+
+    sourceCompatibility = 17
+    targetCompatibility = 17
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/snapshot' }
+    }
+
+
+    dependencyManagement {
+        imports {
+            mavenBom("org.springframework.boot:spring-boot-dependencies:$versions.springBootDependencies")
+        }
+
+    }
+
+    release {
+        versionPatterns = [
+                /(\d+)([^\d]*$)/: { Matcher m, Project p -> m.replaceAll("${(m[0][1] as int) + 1}${m[0][2]}") }
+        ]
+
+        git {
+            requireBranch.set(System.getProperty("branch"))
+        }
+
+    }
+
 }

@@ -1,0 +1,10 @@
+/**
+ * In this script should be added all constants of the build.
+ */
+ext {
+    versions = [
+            lombok                : '1.18.24',
+            mapStruct             : '1.5.2.Final',
+            springBootDependencies: '3.1.0'
+    ]
+}

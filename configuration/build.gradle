@@ -1,0 +1,32 @@
+plugins {
+    id "org.springframework.boot"
+    id "com.gorylenko.gradle-git-properties"
+}
+
+buildDir = './../build'
+
+bootJar {
+    archiveFileName = 'rankd.jar'
+}
+
+dependencies {
+    implementation project(':adapters')
+    implementation project(':domain')
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    compileOnly "org.projectlombok:lombok:$versions.lombok"
+    annotationProcessor "org.projectlombok:lombok:$versions.lombok"
+
+    //test
+    testCompileOnly "org.projectlombok:lombok:$versions.lombok"
+    testAnnotationProcessor "org.projectlombok:lombok:$versions.lombok"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+
+}
+
+
+
+test {
+    useJUnitPlatform()
+}
