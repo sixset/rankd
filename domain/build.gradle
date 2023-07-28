@@ -1,0 +1,6 @@
+dependencies {
+
+    compileOnly "org.projectlombok:lombok:$versions.lombok"
+    annotationProcessor "org.projectlombok:lombok:$versions.lombok"
+
+}

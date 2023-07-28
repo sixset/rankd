@@ -1,0 +1,25 @@
+dependencies {
+    implementation project(':domain')
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    compileOnly "org.projectlombok:lombok:$versions.lombok"
+    annotationProcessor "org.projectlombok:lombok:$versions.lombok"
+
+    implementation "org.mapstruct:mapstruct:$versions.mapStruct"
+    annotationProcessor "org.mapstruct:mapstruct-processor:$versions.mapStruct"
+
+    implementation 'org.springframework.data:spring-data-commons'
+
+    //TEST
+    testAnnotationProcessor "org.projectlombok:lombok:$versions.lombok"
+    testImplementation  "org.projectlombok:lombok:$versions.lombok"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+
+test {
+    useJUnitPlatform()
+}

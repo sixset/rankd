@@ -1,0 +1,27 @@
+dependencies {
+    implementation project(':domain')
+    implementation project(':application')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    compileOnly "org.projectlombok:lombok:$versions.lombok"
+    annotationProcessor "org.projectlombok:lombok:$versions.lombok"
+
+    implementation "org.mapstruct:mapstruct:$versions.mapStruct"
+    annotationProcessor "org.mapstruct:mapstruct-processor:$versions.mapStruct"
+
+    //TEST
+    testCompileOnly "org.projectlombok:lombok:$versions.lombok"
+    testAnnotationProcessor "org.projectlombok:lombok:$versions.lombok"
+    implementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+
+test {
+    useJUnitPlatform()
+}
+
+configurations.implementation {
+    exclude group: "javax.inject", module: "javax.inject"
+    exclude group: "javax.validation", module: "javax.validation"
+}
